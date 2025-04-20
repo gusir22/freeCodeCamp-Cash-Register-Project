@@ -50,10 +50,12 @@ function validatePurchase(cash) {
     /* this function updates the global validPurchase flag to direct the program flow
     to process the rest of the payment or cancel the purchase */
 
-    if (price > cash) {
-        validPurchase = false;
-    } else {
+    // validate if user given cash is sufficient
+    // and registerStatus is not insufficient_funds
+    if (price <= cash && !registerStatus.includes("INSUFFICIENT_FUNDS")) {
         validPurchase = true;
+    } else {
+        validPurchase = false;
     }
 }
 
