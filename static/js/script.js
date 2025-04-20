@@ -19,13 +19,34 @@ let registerStatus;
 // init empty total cid dollar amount. This will be updated with the onclick event.
 let cidAmount;
 
+function processPayment(form) {
+    calcCashInDrawer()
+    console.log(`CID: $${cidAmount}`);
+
+    // parseFloat to ensure value does not turn into a string and cause validation issues
+    let cash = parseFloat(form.cash.value); 
+    console.log(`Cash Given: $${cash}`);
+
+    updateRegisterStatus(cash);
+    console.log(`Status: ${registerStatus}`);
+
+    validatePurchase(cash);
+
+    if (validPurchase) {
+        console.log("Purchase is valid. Calculating change.....");
+    } else {
+        console.log("Purchase is not valid. Please leave the items in the cart.");
+    }
+
+}
+
 function updatePriceScreen() {
     /* This function updates the price total screen with the price variable value.
     It runs on a onload event from the body element in index.html */
     document.getElementById('price-output').innerHTML = `$${price}`;
 }
 
-function validatePurchase() {
+function validatePurchase(cash) {
     /* this function updates the global validPurchase flag to direct the program flow
     to process the rest of the payment or cancel the purchase */
 
@@ -34,18 +55,6 @@ function validatePurchase() {
     } else {
         validPurchase = true;
     }
-}
-
-function processPayment(form) {
-    calcCashInDrawer()
-    console.log(`CID: $${cidAmount}`);
-
-    let cash = form.cash.value;
-    console.log(`Cash Given: $${cash}`);
-
-    updateRegisterStatus(cash);
-    console.log(`Status: ${registerStatus}`);
-
 }
 
 function calcCashInDrawer() {
