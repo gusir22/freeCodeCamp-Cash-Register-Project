@@ -16,6 +16,11 @@ let registerStatus;
 // init empty total cid dollar amount. This will be updated with the onclick event.
 let cidAmount;
 
+function updatePriceScreen() {
+    /* This function updates the price total screen with the price variable value.
+    It runs on a onload event from the body element in index.html */
+    document.getElementById('price-output').innerHTML = `$${price}`;
+}
 
 function processPayment(form) {
     calcCashInDrawer()

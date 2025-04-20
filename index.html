@@ -6,11 +6,13 @@
         <link rel="stylesheet" href="static/css/styles.css">
         <script src="static/js/script.js"></script> 
     </head>
-    <body>
+    <body onload="updatePriceScreen()">
         <header>
             <h1>Cash Register</h1>
         </header>
         <main>
+            <p>Total Price:</p>
+            <p id="price-output"></p>
             <form>
                 <label for="cash">Amount to Pay:</label>
                 <input type="number" id="cash">
