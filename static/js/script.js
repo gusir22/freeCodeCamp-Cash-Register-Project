@@ -10,3 +10,10 @@ let cid = [
   ['TWENTY', 60],
   ['ONE HUNDRED', 100]
 ];
+
+
+function processPayment(form) {
+    let cash = form.cash.value;
+    console.log(`Cash Given: $${cash}`);
+
+}
