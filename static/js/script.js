@@ -55,6 +55,10 @@ function validatePurchase(cash) {
     if (price <= cash && !registerStatus.includes("INSUFFICIENT_FUNDS")) {
         validPurchase = true;
     } else {
+        // alert user if they do not have enough money for the purchase
+        if (price > cash) {
+            alert("Customer does not have enough money to purchase the item");
+        }
         validPurchase = false;
     }
 }
