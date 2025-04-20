@@ -11,8 +11,10 @@ let cid = [
   ['ONE HUNDRED', 100]
 ];
 
+// init empty registerStatus variable. This is updated with the onclick event
 let registerStatus;
-let cidAmount = 0.00;
+// init empty total cid dollar amount. This will be updated with the onclick event.
+let cidAmount;
 
 
 function processPayment(form) {
@@ -28,15 +30,23 @@ function processPayment(form) {
 }
 
 function calcCashInDrawer() {
-    cidAmount = 0.00;
+    /* This function calculates the total amount inside the cash drawer (cid array) */
+
+    cidAmount = 0.00; // reset cid amount to prevent bugs
+
+    // add up the amount of each denomination
     for (let denomination of cid){
         cidAmount += denomination[1];
     }
 
-    cidAmount = cidAmount.toFixed(2);
+    cidAmount = cidAmount.toFixed(2); // round to the hundredths place
 }
 
 function updateRegisterStatus(cash) {
+    /* This function compares the user given cash amount against
+    the total amount in the cash drawer and updates the registerStatus
+    code to the appropriate scenario response */
+
     if (cash < cidAmount) {
         registerStatus = "OPEN";
     } else if (cash == cidAmount) {
