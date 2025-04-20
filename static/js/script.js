@@ -11,6 +11,9 @@ let cid = [
   ['ONE HUNDRED', 100]
 ];
 
+// init validPurchase flag. This keeps track if the program should execute the
+// payment process or not. False by default for security reasons.
+let validPurchase = false;
 // init empty registerStatus variable. This is updated with the onclick event
 let registerStatus;
 // init empty total cid dollar amount. This will be updated with the onclick event.
@@ -20,6 +23,17 @@ function updatePriceScreen() {
     /* This function updates the price total screen with the price variable value.
     It runs on a onload event from the body element in index.html */
     document.getElementById('price-output').innerHTML = `$${price}`;
+}
+
+function validatePurchase() {
+    /* this function updates the global validPurchase flag to direct the program flow
+    to process the rest of the payment or cancel the purchase */
+
+    if (price > cash) {
+        validPurchase = false;
+    } else {
+        validPurchase = true;
+    }
 }
 
 function processPayment(form) {
