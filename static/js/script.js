@@ -102,8 +102,6 @@ function calcChange(cash) {
     let changeCents = Math.round(((changeAmount - Math.trunc(changeAmount))*100)); // adjust cents to integers to prevent validations errors
     let changeDollars = Math.trunc(changeAmount);
 
-    console.log(`START | changeAmount: $${changeAmount} \n changeCents: $${changeCents/100} \n changeDollars: $${changeDollars}`);
-
     // create change list
     let pennies = 0;
     let nickels = 0;
@@ -120,19 +118,15 @@ function calcChange(cash) {
         if (changeCents >= 25) {
             quarters += 25;
             changeCents -= 25;
-            console.log(`\t[+] Plus $0.25 (${changeCents})`);
         } else if (changeCents >= 10) {
             dimes += 10;
             changeCents -= 10;
-            console.log(`\t[+] Plus $0.10 (${changeCents})`);
         } else if (changeCents >= 5) {
             nickels += 5;
             changeCents -= 5;
-            console.log(`\t[+] Plus $0.05 (${changeCents})`);
         } else if (changeCents >= 1) {
             pennies += 1;
             changeCents -= 1;
-            console.log(`\t[+] Plus $0.01 (${changeCents})`);
         }
     } while (changeCents > 0)
 
@@ -141,23 +135,18 @@ function calcChange(cash) {
         if (changeDollars >= 100) {
             hundreds += 100;
             changeDollars -= 100;
-            console.log(`\t[+] Plus $100 (${changeDollars})`);
         } else if (changeDollars >= 20) {
             twenties += 20;
             changeDollars -= 20;
-            console.log(`\t[+] Plus $20 (${changeDollars})`);
         } else if (changeDollars >= 10) {
             tens += 10;
             changeDollars -= 10;
-            console.log(`\t[+] Plus $10 (${changeDollars})`);
         } else if (changeDollars >= 5) {
             fives += 5;
             changeDollars -= 5;
-            console.log(`\t[+] Plus $5 (${changeDollars})`);
         } else if (changeDollars >= 1) {
             ones += 1;
             changeDollars -= 1;
-            console.log(`\t[+] Plus $1 (${changeDollars})`);
         }
     } while ( changeDollars > 0)
 
@@ -197,7 +186,4 @@ function calcChange(cash) {
     if (hundreds) {
         change.push(['ONE HUNDRED', hundreds]);
     }
-    
-    console.log(change);
-    console.log(`END | changeAmount: $${changeAmount} \n changeCents: $${changeCents} \n changeDollars: $${changeDollars}`);
 }
