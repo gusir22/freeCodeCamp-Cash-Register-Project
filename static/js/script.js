@@ -11,9 +11,34 @@ let cid = [
   ['ONE HUNDRED', 100]
 ];
 
+var registerStatus;
+
 
 function processPayment(form) {
     let cash = form.cash.value;
     console.log(`Cash Given: $${cash}`);
 
+    updateRegisterStatus(cash);
+    console.log(`Status: ${registerStatus}`);
+
+}
+
+function updateRegisterStatus(cash) {
+    let cidAmount = 0.00;
+
+    for (let denomination of cid){
+        cidAmount += denomination[1];
+    }
+
+    cidAmount = cidAmount.toFixed(2);
+
+    console.log(cidAmount);
+
+    if (cash < cidAmount) {
+        registerStatus = "OPEN";
+    } else if (cash == cidAmount) {
+        registerStatus = "CLOSED";
+    } else if (cash > cidAmount) {
+        registerStatus = "INSUFFICIENT_FUNDS";
+    }
 }
