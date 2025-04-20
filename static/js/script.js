@@ -18,6 +18,8 @@ let validPurchase = false;
 let registerStatus;
 // init empty total cid dollar amount. This will be updated with the onclick event.
 let cidAmount;
+// init empty change array.
+change = new Array();
 
 function processPayment(form) {
     calcCashInDrawer()
@@ -34,6 +36,7 @@ function processPayment(form) {
 
     if (validPurchase) {
         console.log("Purchase is valid. Calculating change.....");
+        calcChange(cash);
     } else {
         console.log("Purchase is not valid. Please leave the items in the cart.");
     }
@@ -88,4 +91,16 @@ function updateRegisterStatus(cash) {
     } else if (cash > cidAmount) {
         registerStatus = "INSUFFICIENT_FUNDS";
     }
+}
+
+function calcChange(cash) {
+    /* This function updates the gloabl change 2D array */
+
+    let changeAmount = cash - price; // calculate the change amount
+
+    // separate change into cents and dollar parts
+    let changeCents = (changeAmount - Math.trunc(changeAmount)).toFixed(2);
+    let changeDollars = Math.trunc(changeAmount);
+
+    console.log(`changeAmount: $${changeAmount} \n changeCents: $${changeCents} \n changeDollars: $${changeDollars}`);
 }
