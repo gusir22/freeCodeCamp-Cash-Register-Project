@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="static/css/styles.css">
         <script src="static/js/script.js"></script> 
     </head>
-    <body onload="displayPrice()">
+    <body onload="preloadCashData()">
         <header>
             <h1>Cash Register</h1>
         </header>
@@ -19,6 +19,7 @@
                 <button type="button" id="purchase-btn" onclick="processPayment(form)">Pay</button>
             </form>
             <div id="change-due"></div>
+            <div id="cash-in-register"></div>
         </main>
         <footer>
             <p>

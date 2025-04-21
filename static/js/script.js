@@ -123,8 +123,7 @@ function deductChangeFromDrawer() {
 }
 
 function displayPrice() {
-    /* This function simply prints the price value to the #price-output element.
-    It is triggered on the index.html body onload event */
+    /* This function simply prints the price value to the #price-output element. */
 
     document.getElementById('price-output').innerText = `$${price}`;
 }
@@ -144,6 +143,32 @@ function displayResults() {
     document.getElementById('change-due').innerHTML = resultMessage;
 }
 
+function displayCashInDrawer() {
+    /* This function outputs the cash in drawer amounts to the
+    index.html #cash-in-register div */
+
+    let cashHTML = `<p>CASH IN DRAWER</p><ul>`;
+    cashHTML += `<li>ONE HUNDRED: $${cashRegister.ONEHUNDRED}</li>`;
+    cashHTML += `<li>TWENTY: $${cashRegister.TWENTY}</li>`;
+    cashHTML += `<li>TEN: $${cashRegister.TEN}</li>`;
+    cashHTML += `<li>FIVE: $${cashRegister.FIVE}</li>`;
+    cashHTML += `<li>ONE: $${cashRegister.ONE}</li>`;
+    cashHTML += `<li>QUARTER: $${cashRegister.QUARTER}</li>`;
+    cashHTML += `<li>DIME: $${cashRegister.DIME}</li>`;
+    cashHTML += `<li>NICKEL: $${cashRegister.NICKEL}</li>`;
+    cashHTML += `<li>PENNY: $${cashRegister.PENNY}</li>`;
+    cashHTML += `</ul>`;
+
+    document.getElementById('cash-in-register').innerHTML = cashHTML;
+}
+
+function preloadCashData() {
+    /* This function preloads the cash data to the user and cashier */
+
+    displayPrice();
+    displayCashInDrawer();
+}
+
 function processPayment(form) {
     /* This function processes the main algorythm to assist in the
     purchase and provide the user their change.
@@ -161,4 +186,5 @@ function processPayment(form) {
     }
 
     displayResults(); // print results
+    displayCashInDrawer(); // display cash in drawer
 }
