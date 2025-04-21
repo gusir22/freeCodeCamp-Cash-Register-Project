@@ -24,6 +24,10 @@ function calcChange() {
 
     change.total = cash - price; // save total change amount to obj
 
+    // separate change into cents and dollar parts
+    change.centsTotal = change.total - Math.trunc(change.total); // store cents total to obj
+    change.dollarsTotal = Math.trunc(change.total); // store dollars total to obj
+
 }
 
 function displayPrice() {
