@@ -131,6 +131,50 @@ function updateCashInDrawer() {
     }
 }
 
+function formatChangeData() {
+    /* This function formats the output innerHTML messge for the change requested amounts */
+
+    let formattedHTML; // init empty formatted string
+
+    if (change.ONEHUNDRED) {
+        formattedHTML += `ONE HUNDRED: $${change.ONEHUNDRED} `;
+    }
+
+    if (change.TWENTY) {
+        formattedHTML += `TWENTY: $${change.TWENTY} `;
+    }
+
+    if (change.TEN) {
+        formattedHTML += `TEN: $${change.TEN} `;
+    }
+
+    if (change.FIVE) {
+        formattedHTML += `FIVE: $${change.FIVE} `;
+    }
+
+    if (change.ONE) {
+        formattedHTML += `ONE: $${change.ONE} `;
+    }
+
+    if (change.QUARTER) {
+        formattedHTML += `QUARTER: $${change.QUARTER} `;
+    }
+
+    if (change.DIME) {
+        formattedHTML += `DIME: $${change.DIME} `;
+    }
+
+    if (change.NICKEL) {
+        formattedHTML += `NICKEL: $${change.NICKEL} `;
+    }
+
+    if (change.PENNY) {
+        formattedHTML += `PENNY: $${change.PENNY} `;
+    }
+
+    return formattedHTML;
+}
+
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element. */
 
@@ -141,15 +185,10 @@ function displayResults() {
     /* This function formats and outputs the result message to the
     #change-due element. */
 
-    let resultMessage = `<p>Status: Working<p>`;
+    let resultMessage = `Status: Working `;
+    resultMessage += formatChangeData();
 
-    resultMessage += `<p>Cash Value: $${cash}</p>`; // display cash variable value
-    resultMessage += `<p>Change Amount: $${change.total}</p>`; // display total change amount
-    resultMessage += `<p>Validation Flags</p><ul>`;
-    resultMessage += `<li>Insufficient Funds: ${validationFlags.insufficientFunds}</li>`;
-    resultMessage += `</ul>`;
-
-    document.getElementById('change-due').innerHTML = resultMessage;
+    document.getElementById('change-due').innerText = resultMessage;
 }
 
 function displayCashInDrawer() {
