@@ -108,6 +108,20 @@ function confirmCashInDrawerFunds() {
 
 }
 
+function deductChangeFromDrawer() {
+    /* This function updates the cash register obj by deducting the change provided
+    to the user */
+
+    cashRegister.ONEHUNDRED -= change.ONEHUNDRED;
+    cashRegister.TWENTY -= change.TWENTY;
+    cashRegister.TEN -= change.TEN;
+    cashRegister.ONE -= change.ONE;
+    cashRegister.QUARTER -= change.QUARTER;
+    cashRegister.DIME -= change.DIME;
+    cashRegister.NICKEL -= change.NICKEL;
+    cashRegister.PENNY -= change.PENNY
+}
+
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element.
     It is triggered on the index.html body onload event */
@@ -140,6 +154,11 @@ function processPayment(form) {
     cash = form.cash.value;
     calcChange();
     confirmCashInDrawerFunds();
+
+    // if sufficient funds..
+    if (!validationFlags.insufficientFunds) {
+        deductChangeFromDrawer(); // provide change to user
+    }
 
     displayResults(); // print results
 }
