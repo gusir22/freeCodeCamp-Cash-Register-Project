@@ -1,6 +1,6 @@
-let price = 1.87;
-let cash; // init empty cash input user value
-let cid = [
+let price = 1.87; // variable provided by freeCodeCamp project
+let cash = 0.00; // init empty global cash input user value
+let cid = [ // array provided by freeCodeCamp project
   ['PENNY', 1.01],
   ['NICKEL', 2.05],
   ['DIME', 3.1],
@@ -11,6 +11,20 @@ let cid = [
   ['TWENTY', 60],
   ['ONE HUNDRED', 100]
 ];
+
+var change = new Object() // init change object
+let resultMessage; // init empty global result message
+
+
+
+function calcChange() {
+    /* this function calculates the amount value we need of each denominations
+    we have available in the cash in drawer (cid) and saves them in the global
+    change object */
+
+    change.total = cash - price; // save total change amount to obj
+
+}
 
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element.
@@ -25,7 +39,8 @@ function displayResults() {
 
     let resultMessage = `<p>Status: Working<p>`;
 
-    resultMessage += `<p>Cash Value: ${cash}</p><br>`; // display cash variable value
+    resultMessage += `<p>Cash Value: $${cash}</p>`; // display cash variable value
+    resultMessage += `<p>Change Amount: $${change.total}</p>`; // display total change amount
 
     document.getElementById('change-due').innerHTML = resultMessage;
 }
@@ -38,6 +53,7 @@ function processPayment(form) {
     console.log("Processing Payment ...\nPlease wait ...");
 
     cash = form.cash.value;
+    calcChange();
 
     displayResults(); // print results
 }
