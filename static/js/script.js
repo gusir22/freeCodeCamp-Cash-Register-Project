@@ -14,6 +14,14 @@ let cid = [
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element.
     It is triggered on the index.html body onload event */
-    
+
     document.getElementById('price-output').innerText = `$${price}`;
+}
+
+function processPayment(form) {
+    /* This function processes the main algorythm to assist in the
+    purchase and provide the user their change.
+    It is triggered with the #purchase-btn onclick event. */
+
+    console.log("Processing Payment ...\nPlease wait ...");
 }
