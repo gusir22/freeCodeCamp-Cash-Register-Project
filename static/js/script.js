@@ -37,6 +37,10 @@ function processPayment(form) {
     if (validPurchase) {
         console.log("Purchase is valid. Calculating change.....");
         calcChange(cash);
+        console.log(cid);
+        deductChangeFromDrawer();
+        console.log(change);
+        console.log(cid);
     } else {
         console.log("Purchase is not valid. Please leave the items in the cart.");
     }
@@ -186,4 +190,38 @@ function calcChange(cash) {
     if (hundreds) {
         change.push(['ONE HUNDRED', hundreds]);
     }
+}
+
+function deductChangeFromDrawer() {
+    /* This function deducts the change calculated by calcChange() from cid */
+    change.forEach(denomination => {
+        switch (denomination[0]){
+            case 'PENNY':
+                cid[0][1] -= denomination[1];
+                break;
+            case 'NICKLE':
+                cid[1][1] -= denomination[1];
+                break;
+            case 'DIME':
+                cid[2][1] -= denomination[1];
+                break;
+            case 'QUARTER':
+                cid[3][1] -= denomination[1];
+                break;
+            case 'ONE':
+                cid[4][1] -= denomination[1];
+                break;
+            case 'FIVE':
+                cid[5][1] -= denomination[1];
+            case 'TEN':
+                cid[6][1] -= denomination[1];
+                break;
+            case 'TWENTY':
+                cid[7][1] -= denomination[1];
+                break;
+            case 'ONE HUNDRED':
+                cid[8][1] -= denomination[1];
+                break;
+        }   
+    });
 }
