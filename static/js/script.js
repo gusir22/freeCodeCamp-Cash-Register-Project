@@ -167,7 +167,7 @@ function deductChangeFromDrawer() {
     if (change.DIME) {
         cashRegister.DIME -= change.DIME; // update cash in register
         changeOutput += `DIME: $${change.DIME} `; // update the change output message
-        change.DIME; // reset change memory to prepare for next purchase
+        change.DIME = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.NICKEL) {
