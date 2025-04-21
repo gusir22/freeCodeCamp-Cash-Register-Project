@@ -35,6 +35,7 @@ let changeOutput; // init empty global change output message
 // init validationFlag object
 var validationFlags = {
     'insufficientFunds': false,
+    'insufficientCashFromUser': false,
 }
 
 
@@ -89,10 +90,12 @@ function calcChange() {
 
 }
 
-function confirmCashInDrawerFunds() {
+function confirmTransaction() {
     /* This function compares the cash in drawer vs the change amount
-    to confirm we have the sufficient cash to process the purchase. */
+    to confirm we have the sufficient cash to process the purchase and user 
+    pays with the correct amount. */
 
+    // confirm we have the sufficient cash in the register for the necessary change
     if (
         cashRegister.ONEHUNDRED < change.ONEHUNDRED ||
         cashRegister.TWENTY < change.TWENTY ||
@@ -105,6 +108,10 @@ function confirmCashInDrawerFunds() {
         cashRegister.PENNY < change.PENNY 
     ) {
         validationFlags.insufficientFunds = true; // trigger insufficient funds flag
+    }
+
+    if (cash < price) {
+        validationFlags.insufficientCashFromUser = true;
     }
 
 }
@@ -230,14 +237,19 @@ function processPayment(form) {
 
     cash = form.cash.value;
     calcChange();
-    confirmCashInDrawerFunds();
+    confirmTransaction();
 
-    // if sufficient funds..
-    if (!validationFlags.insufficientFunds) {
+    // validate and process payment as necessary..
+    if (!validationFlags.insufficientFunds && !validationFlags.insufficientCashFromUser) {
         deductChangeFromDrawer(); // provide change to user
         updateCashInDrawer(); // update ciw 2d array
+        displayResults(); // print results
+    } else if (validationFlags.insufficientCashFromUser) {
+        alert("Customer does not have enough money to purchase the item");
+
+        validationFlags.insufficientCashFromUser = false; // reset flag for next use
     }
 
-    displayResults(); // print results
+    
     displayCashInDrawer(); // display cash in drawer
 }
