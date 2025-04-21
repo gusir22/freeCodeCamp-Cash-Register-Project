@@ -9,8 +9,10 @@ let cid = [ // array provided by freeCodeCamp project
   ['FIVE', 55],
   ['TEN', 20],
   ['TWENTY', 60],
-  ['ONE HUNDRED', 100]
+  ['ONEHUNDRED', 100]
 ];
+// create cash register object
+var cashRegister = Object.fromEntries(cid);
 
 // init change object
 var change = {
@@ -28,6 +30,11 @@ var change = {
     'ONEHUNDRED': 0.00,
 } 
 let resultMessage; // init empty global result message
+
+// init validationFlag object
+var validationFlags = {
+    'insufficientFunds': false,
+}
 
 
 
@@ -81,6 +88,26 @@ function calcChange() {
 
 }
 
+function confirmCashInDrawerFunds() {
+    /* This function compares the cash in drawer vs the change amount
+    to confirm we have the sufficient cash to process the purchase. */
+
+    if (
+        cashRegister.ONEHUNDRED < change.ONEHUNDRED ||
+        cashRegister.TWENTY < change.TWENTY ||
+        cashRegister.TEN < change.TEN ||
+        cashRegister.FIVE < change.FIVE ||
+        cashRegister.ONE < change.ONE ||
+        cashRegister.QUARTER < change.QUARTER ||
+        cashRegister.DIME < change.DIME ||
+        cashRegister.NICKEL < change.NICKEL ||
+        cashRegister.PENNY < change.PENNY 
+    ) {
+        validationFlags.insufficientFunds = true; // trigger insufficient funds flag
+    }
+
+}
+
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element.
     It is triggered on the index.html body onload event */
@@ -96,6 +123,9 @@ function displayResults() {
 
     resultMessage += `<p>Cash Value: $${cash}</p>`; // display cash variable value
     resultMessage += `<p>Change Amount: $${change.total}</p>`; // display total change amount
+    resultMessage += `<p>Validation Flags</p><ul>`;
+    resultMessage += `<li>Insufficient Funds: ${validationFlags.insufficientFunds}</li>`;
+    resultMessage += `</ul>`;
 
     document.getElementById('change-due').innerHTML = resultMessage;
 }
@@ -109,6 +139,7 @@ function processPayment(form) {
 
     cash = form.cash.value;
     calcChange();
+    confirmCashInDrawerFunds();
 
     displayResults(); // print results
 }
