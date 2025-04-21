@@ -122,6 +122,15 @@ function deductChangeFromDrawer() {
     cashRegister.PENNY -= change.PENNY
 }
 
+function updateCashInDrawer() {
+    /* This function saves the updated cash in drawer values from the cash register object
+    into the 2d cid array using their matching key/value pairs */
+
+    for (let denomination of cid) {
+        denomination[1] = cashRegister[denomination[0]];
+    }
+}
+
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element. */
 
@@ -183,6 +192,7 @@ function processPayment(form) {
     // if sufficient funds..
     if (!validationFlags.insufficientFunds) {
         deductChangeFromDrawer(); // provide change to user
+        updateCashInDrawer(); // update ciw 2d array
     }
 
     displayResults(); // print results
