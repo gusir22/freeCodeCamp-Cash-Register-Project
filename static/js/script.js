@@ -112,14 +112,50 @@ function deductChangeFromDrawer() {
     /* This function updates the cash register obj by deducting the change provided
     to the user */
 
-    cashRegister.ONEHUNDRED -= change.ONEHUNDRED;
-    cashRegister.TWENTY -= change.TWENTY;
-    cashRegister.TEN -= change.TEN;
-    cashRegister.ONE -= change.ONE;
-    cashRegister.QUARTER -= change.QUARTER;
-    cashRegister.DIME -= change.DIME;
-    cashRegister.NICKEL -= change.NICKEL;
-    cashRegister.PENNY -= change.PENNY
+    if (change.ONEHUNDRED) {
+        cashRegister.ONEHUNDRED -= change.ONEHUNDRED; // update cash in register
+        change.ONEHUNDRED = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.TWENTY) {
+        cashRegister.TWENTY -= change.TWENTY; // update cash in register
+        change.TWENTY = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.TEN) {
+        cashRegister.TEN -= change.TEN; // update cash in register
+        change.TEN = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.FIVE) {
+        cashRegister.FIVE -= change.FIVE; // update cash in register
+        change.FIVE = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.ONE) {
+        cashRegister.ONE -= change.ONE; // update cash in register
+        change.ONE = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.QUARTER) { // update cash in register
+        cashRegister.QUARTER -= change.QUARTER; // update cash in register
+        change.QUARTER = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.DIME) {
+        cashRegister.DIME -= change.DIME; // update cash in register
+        change.DIME; // reset change memory to prepare for next purchase
+    }
+
+    if (change.NICKEL) {
+        cashRegister.NICKEL -= change.NICKEL; // update cash in register
+        change.NICKEL = 0.00; // reset change memory to prepare for next purchase
+    }
+
+    if (change.PENNY) {
+        cashRegister.PENNY -= change.PENNY // update cash in register
+        change.PENNY = 0.00; // reset change memory to prepare for next purchase
+    }
 }
 
 function updateCashInDrawer() {
