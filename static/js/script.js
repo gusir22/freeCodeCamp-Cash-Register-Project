@@ -11,10 +11,10 @@ let cid = [ // array provided by freeCodeCamp project
   ['TWENTY', 60],
   ['ONEHUNDRED', 100]
 ];
-// create cash register object
-var cashRegister = Object.fromEntries(cid);
-cashRegister.status = "OPEN"; // set default OPEN cash register status
-
+// init default cashRegister obj
+var cashRegister = {
+    'status': 'OPEN', // default OPEN status
+};
 // init change object
 var change = {
     'total': 0.00,
@@ -41,6 +41,18 @@ var validationFlags = {
 
 function roundToHundredths(num) {
     return Math.round(num*100)/100;
+}
+
+function loadCashRegisterData() {
+    /* This function loads the register data from the 2d cid array */
+
+    cashRegister = {};
+    cashRegister.total = 0.00;
+
+    for (let [denomination, amount] of cid) {
+        cashRegister[denomination] = amount;
+        cashRegister.total += amount;
+    }
 }
 
 function calcChange() {
@@ -116,7 +128,7 @@ function confirmTransaction() {
 
     if (cash < price) {
         validationFlags.insufficientCashFromUser = true;
-    } else if (cash == price) {
+    } else if (cashRegister.total == change.total) {
         cashRegister.status = "CLOSED"; // update status to CLOSED
     }
 
@@ -243,6 +255,7 @@ function processPayment(form) {
 
     cash = form.cash.value;
     calcChange();
+    let cashRegister = loadCashRegisterData();
     confirmTransaction();
 
     // validate and process payment as necessary..
