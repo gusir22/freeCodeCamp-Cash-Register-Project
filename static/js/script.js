@@ -10,3 +10,10 @@ let cid = [
   ['TWENTY', 60],
   ['ONE HUNDRED', 100]
 ];
+
+function displayPrice() {
+    /* This function simply prints the price value to the #price-output element.
+    It is triggered on the index.html body onload event */
+    
+    document.getElementById('price-output').innerText = `$${price}`;
+}
