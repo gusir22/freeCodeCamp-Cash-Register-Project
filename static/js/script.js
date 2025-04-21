@@ -38,7 +38,9 @@ var validationFlags = {
     'insufficientCashFromUser': false,
 }
 
-
+function roundToHundredths(num) {
+    return Math.round(num*100)/100;
+}
 
 function calcChange() {
     /* this function calculates the amount value we need of each denominations
@@ -53,16 +55,16 @@ function calcChange() {
 
     // tally cent denominations until there is less than a penny left
     do {
-        if (change.centsTotal >= 0.25) {
+        if (roundToHundredths(change.centsTotal) >= 0.25) {
             change.QUARTER += 0.25;
             change.centsTotal -= 0.25;
-        } else if (change.centsTotal >= 0.10) {
+        } else if (roundToHundredths(change.centsTotal) >= 0.10) {
             change.DIME += 0.10;
             change.centsTotal -= 0.10;
-        } else if (change.centsTotal >= 0.05) {
+        } else if (roundToHundredths(change.centsTotal) >= 0.05) {
             change.NICKEL += 0.05;
             change.centsTotal -= 0.05;
-        } else if (change.centsTotal >= 0.01) {
+        } else if (roundToHundredths(change.centsTotal) >= 0.01) {
             change.PENNY += 0.01;
             change.centsTotal -= 0.01;
         }
