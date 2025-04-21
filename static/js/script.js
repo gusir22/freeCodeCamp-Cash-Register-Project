@@ -30,6 +30,7 @@ var change = {
     'ONEHUNDRED': 0.00,
 } 
 let resultMessage; // init empty global result message
+let changeOutput; // init empty global change output message
 
 // init validationFlag object
 var validationFlags = {
@@ -112,48 +113,59 @@ function deductChangeFromDrawer() {
     /* This function updates the cash register obj by deducting the change provided
     to the user */
 
+    changeOutput = ""; // reset change output string for new data
+
     if (change.ONEHUNDRED) {
         cashRegister.ONEHUNDRED -= change.ONEHUNDRED; // update cash in register
+        changeOutput += `ONE HUNDRED: $${change.ONEHUNDRED} ` // update the change output message
         change.ONEHUNDRED = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.TWENTY) {
         cashRegister.TWENTY -= change.TWENTY; // update cash in register
+        changeOutput += `TWENTY: $${change.TWENTY} `; // update the change output message
         change.TWENTY = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.TEN) {
         cashRegister.TEN -= change.TEN; // update cash in register
+        changeOutput += `TEN: $${change.TEN} `; // update the change output message
         change.TEN = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.FIVE) {
         cashRegister.FIVE -= change.FIVE; // update cash in register
+        changeOutput += `FIVE: $${change.FIVE} `; // update the change output message
         change.FIVE = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.ONE) {
         cashRegister.ONE -= change.ONE; // update cash in register
+        changeOutput += `ONE: $${change.ONE} `; // update the change output message
         change.ONE = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.QUARTER) { // update cash in register
         cashRegister.QUARTER -= change.QUARTER; // update cash in register
+        changeOutput += `QUARTER: $${change.QUARTER} `; // update the change output message
         change.QUARTER = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.DIME) {
         cashRegister.DIME -= change.DIME; // update cash in register
+        changeOutput += `DIME: $${change.DIME} `; // update the change output message
         change.DIME; // reset change memory to prepare for next purchase
     }
 
     if (change.NICKEL) {
         cashRegister.NICKEL -= change.NICKEL; // update cash in register
+        changeOutput += `NICKEL: $${change.NICKEL} `; // update the change output message
         change.NICKEL = 0.00; // reset change memory to prepare for next purchase
     }
 
     if (change.PENNY) {
         cashRegister.PENNY -= change.PENNY // update cash in register
+        changeOutput += `PENNY: $${change.PENNY} `; // update the change output message
         change.PENNY = 0.00; // reset change memory to prepare for next purchase
     }
 }
@@ -167,50 +179,6 @@ function updateCashInDrawer() {
     }
 }
 
-function formatChangeData() {
-    /* This function formats the output innerHTML messge for the change requested amounts */
-
-    let formattedHTML; // init empty formatted string
-
-    if (change.ONEHUNDRED) {
-        formattedHTML += `ONE HUNDRED: $${change.ONEHUNDRED} `;
-    }
-
-    if (change.TWENTY) {
-        formattedHTML += `TWENTY: $${change.TWENTY} `;
-    }
-
-    if (change.TEN) {
-        formattedHTML += `TEN: $${change.TEN} `;
-    }
-
-    if (change.FIVE) {
-        formattedHTML += `FIVE: $${change.FIVE} `;
-    }
-
-    if (change.ONE) {
-        formattedHTML += `ONE: $${change.ONE} `;
-    }
-
-    if (change.QUARTER) {
-        formattedHTML += `QUARTER: $${change.QUARTER} `;
-    }
-
-    if (change.DIME) {
-        formattedHTML += `DIME: $${change.DIME} `;
-    }
-
-    if (change.NICKEL) {
-        formattedHTML += `NICKEL: $${change.NICKEL} `;
-    }
-
-    if (change.PENNY) {
-        formattedHTML += `PENNY: $${change.PENNY} `;
-    }
-
-    return formattedHTML;
-}
-
 function displayPrice() {
     /* This function simply prints the price value to the #price-output element. */
 
@@ -222,7 +190,7 @@ function displayResults() {
     #change-due element. */
 
     let resultMessage = `Status: Working `;
-    resultMessage += formatChangeData();
+    resultMessage += changeOutput;
 
     document.getElementById('change-due').innerText = resultMessage;
 }
