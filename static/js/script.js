@@ -13,6 +13,7 @@ let cid = [ // array provided by freeCodeCamp project
 ];
 // create cash register object
 var cashRegister = Object.fromEntries(cid);
+cashRegister.status = "OPEN"; // set default OPEN cash register status
 
 // init change object
 var change = {
@@ -110,10 +111,13 @@ function confirmTransaction() {
         cashRegister.PENNY < change.PENNY 
     ) {
         validationFlags.insufficientFunds = true; // trigger insufficient funds flag
+        cashRegister.status = "INSUFFICIENT_FUNDS"; // update status to INSUFFICIENT_FUNDS
     }
 
     if (cash < price) {
         validationFlags.insufficientCashFromUser = true;
+    } else if (cash == price) {
+        cashRegister.status = "CLOSED"; // update status to CLOSED
     }
 
 }
@@ -198,7 +202,7 @@ function displayResults() {
     /* This function formats and outputs the result message to the
     #change-due element. */
 
-    let resultMessage = `Status: Working `;
+    let resultMessage = `Status: ${cashRegister.status} `;
     resultMessage += changeOutput;
 
     document.getElementById('change-due').innerText = resultMessage;
